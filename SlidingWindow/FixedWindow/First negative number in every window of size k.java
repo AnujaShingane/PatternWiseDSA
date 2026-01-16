@@ -26,22 +26,26 @@ Window [30, 16, 28] No negative integers, output is 0.
 
 
 class Solution {
-    public long[] printFirstNegativeInteger(long[] nums, int n, int k) {
-        long[] res = new long[n - k + 1];
+    static List<Integer> firstNegInt(int arr[], int k) {
+        int n = arr.length;
+        List<Integer> list = new ArrayList<>();
         Queue<Integer> q = new LinkedList<>();
-        int idx = 0;
-
-        for (int i = 0; i < n; i++) {
-            if (nums[i] < 0) q.add(i);
-
-            if (i >= k - 1) {
-                while (!q.isEmpty() && q.peek() < i - k + 1)
+        
+        for(int i = 0; i < n ; i++){
+            if(arr[i]<0)q.add(i);
+            
+            //start when window become size k
+            if(i>=k-1){
+                //if out of range remove
+                while(!q.isEmpty() && q.peek()<i-k+1){
                     q.poll();
-
-                res[idx++] = q.isEmpty() ? 0 : nums[q.peek()];
+                }
+                
+                if(q.isEmpty())list.add(0);
+                else list.add(arr[q.peek()]);
             }
         }
-        return res;
+        return list;
     }
 }
 
