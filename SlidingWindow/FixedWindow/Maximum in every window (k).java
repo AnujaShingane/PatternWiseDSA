@@ -13,6 +13,7 @@ Explanation:
 5th contiguous subarray [4, 5, 2], max = 5
 6th contiguous subarray [5, 2, 3], max = 5
 7th contiguous subarray [2, 3, 6], max = 6
+
 Input: arr[] = [5, 1, 3, 4, 2], k = 1
 Output: [5, 1, 3, 4, 2]
 Explanation: When k = 1, each element in the array is its own subarray, so the output is simply the same array
