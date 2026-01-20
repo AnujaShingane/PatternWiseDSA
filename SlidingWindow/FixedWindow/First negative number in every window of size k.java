@@ -1,3 +1,6 @@
+Check if in Range -> curr_index < i-k+1
+
+
 /*
 Given an array arr[]  and a positive integer k, find the first negative integer for each and every window(contiguous subarray) of size k.
 
