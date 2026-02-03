@@ -1,3 +1,9 @@
+Patterns in BS :
+1. BS on 1D
+2. BS on Answers: 
+    i. max/min
+    ii. min(max) / max(min)
+
 /*
 A conveyor belt has packages that must be shipped from one port to another within days days.
 
