@@ -26,7 +26,7 @@ class Solution {
     public int minEatingSpeed(int[] piles, int h) {
         int n = piles.length;
         int low = 1;
-        int high = Integer.MIN_VALUE;
+        int high = Integer.MIN_VALUE; // max value
 
         for(int num : piles){
             if(num>high)high=num;
