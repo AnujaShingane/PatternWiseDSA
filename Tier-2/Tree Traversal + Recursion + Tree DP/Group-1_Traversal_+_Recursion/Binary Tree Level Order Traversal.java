@@ -14,17 +14,25 @@
  * }
  */
 class Solution {
-    public List<Integer> postorderTraversal(TreeNode root) {
-        List<Integer> result = new ArrayList<>();
-        post(root,result);
-        return result;
-    }
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        Queue<TreeNode> q = new LinkedList<>();
+        if(root == null)return res;
+        q.add(root);
 
-    public void post(TreeNode node,List<Integer> result) {
-        if(node==null)return;
+        while(!q.isEmpty()){
+            int size = q.size();
+            List<Integer> list = new ArrayList<>();
 
-        post(node.left,result);
-        post(node.right,result);
-        result.add(node.val);
+            for(int i = 0 ; i < size ; i++){
+                TreeNode node = q.poll();
+                list.add(node.val);
+                if(node.left!=null)q.add(node.left);
+                if(node.right!=null)q.add(node.right);
+            }
+            res.add(list);
+        }
+
+        return res;
     }
 }
