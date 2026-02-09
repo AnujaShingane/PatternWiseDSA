@@ -1,7 +1,7 @@
-Binary Search would be better here 
+//Binary Search would be better here 
 
 
-Max heap soln :
+//Max heap soln :
 
 class Solution {
     public int kthSmallest(int[][] matrix, int k) {
