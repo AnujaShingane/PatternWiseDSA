@@ -1,5 +1,5 @@
-TC -> O(log N)
-SC -> O(N)
+TC -> O(log N) Worst case -> O(N)
+SC -> O(1)
 
 /*
 class Node {
