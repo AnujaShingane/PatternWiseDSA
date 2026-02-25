@@ -1,5 +1,5 @@
-TC -> O(logbase2(N))
-SC -> O(N)
+TC -> O(log N) Worst case -> O(N)
+SC -> O(1)
 
 /**
  * Definition for a binary tree node.
