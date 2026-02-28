@@ -42,3 +42,54 @@ class Solution {
         return false;
     }
 }
+
+
+
+Optimal -
+
+class Solution {
+    public boolean findTarget(TreeNode root, int k) {
+        if (root == null) return false;
+
+        BSTIterator l = new BSTIterator(root, false); // normal inorder
+        BSTIterator r = new BSTIterator(root, true);  // reverse inorder
+
+        int i = l.next();
+        int j = r.next();
+
+        while (i < j) {
+            if (i + j == k) return true;
+            else if (i + j < k) i = l.next();
+            else j = r.next();
+        }
+
+        return false;
+    }
+}
+
+class BSTIterator {
+    Stack<TreeNode> st = new Stack<>();
+    boolean reverse = false;
+
+    public BSTIterator(TreeNode root, boolean isReverse) {
+        reverse = isReverse;
+        pushAll(root);
+    }
+
+    public int next() {
+        TreeNode node = st.pop();
+
+        if (!reverse) pushAll(node.right);   // inorder
+        else pushAll(node.left);             // reverse inorder
+
+        return node.val;
+    }
+
+    private void pushAll(TreeNode node) {
+        while (node != null) {
+            st.push(node);
+            if (!reverse) node = node.left;
+            else node = node.right;
+        }
+    }
+}
