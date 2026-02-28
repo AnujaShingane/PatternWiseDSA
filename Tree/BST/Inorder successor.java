@@ -1,3 +1,64 @@
+TC -> O(h) //height of the tree
+SC -> O(1)
+
+
+Optimal Approach- 
+
+    /*
+class Node {
+    int data;
+    Node left, right;
+    Node(int x) {
+        data = x;
+        left = right = null;
+    }
+}
+*/
+
+class Solution {
+    public ArrayList<Node> findPreSuc(Node root, int key) {
+        ArrayList<Node> ans = new ArrayList<>();
+        
+        ans.add(new Node(predecessor(root,key)));
+        ans.add(new Node(successor(root,key)));
+        
+        return ans;
+    }
+    
+    public int predecessor(Node root,int key){
+        Node predecessor = null;
+        int ans = -1;
+        
+        while(root!=null){
+            if(key>root.data){
+                ans = root.data;
+                root = root.right;
+            }else{
+                root=root.left;
+            }
+        }
+        
+        return ans;
+    }
+    
+    public int successor(Node root,int key){
+        Node successor = null;
+        int ans= -1;
+        
+        while(root!=null){
+            if(key<root.data){
+                ans = root.data;
+                root = root.left;
+            }else{
+                root=root.right;
+            }
+        }
+        
+        return ans;
+    }
+}
+
+
 /*
 class Node {
     int data;
