@@ -3,16 +3,15 @@ import java.util.*;
 class Solution {
 
     public static void bfs(int V, ArrayList<ArrayList<Integer>> adj) {
-        
+        ArrayList<Integer> list = new ArrayList<>();
         boolean[] vis = new boolean[V];
         Queue<Integer> q = new LinkedList<>();
-        
         q.add(0);        // starting node
         vis[0] = true;
 
         while(!q.isEmpty()) {
             int node = q.poll();
-            System.out.print(node + " ");
+            list.add(node.val);
 
             for(int it : adj.get(node)) {
                 if(!vis[it]) {
