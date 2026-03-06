@@ -1,3 +1,5 @@
+vis,f(node,parent)
+
 class Solution {
     public boolean isCycle(int V, int[][] edges) {
         ArrayList<ArrayList<Integer>> adj = adjecencyList(V,edges);
