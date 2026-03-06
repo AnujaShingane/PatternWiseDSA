@@ -1,3 +1,5 @@
+vis,pathVis,f(node,parent)
+
 class Solution {
     public boolean isCyclic(int V, int[][] edges) {
         ArrayList<ArrayList<Integer>> adj = adjecencyList(V,edges);
