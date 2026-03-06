@@ -48,7 +48,6 @@ class Solution {
         for(int i = 0 ; i < V ; i++){
             adj.add(new ArrayList<>());
         }
-        
         for(int[] arr : edges){
             adj.get(arr[0]).add(arr[1]);
             adj.get(arr[1]).add(arr[0]);
