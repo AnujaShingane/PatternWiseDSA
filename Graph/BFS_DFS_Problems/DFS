@@ -1,1 +1,22 @@
 
+import java.util.*;
+
+class Solution {
+
+    public static void dfs(int node, boolean[] vis, ArrayList<ArrayList<Integer>> adj) {
+        
+        vis[node] = true;
+        System.out.print(node + " ");
+
+        for(int it : adj.get(node)) {
+            if(!vis[it]) {
+                dfs(it, vis, adj);
+            }
+        }
+    }
+
+    public static void startDFS(int V, ArrayList<ArrayList<Integer>> adj) {
+        boolean[] vis = new boolean[V];
+        dfs(0, vis, adj);   // starting node
+    }
+}
