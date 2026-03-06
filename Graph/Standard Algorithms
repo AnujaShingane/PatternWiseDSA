@@ -1,0 +1,9 @@
+1. BFS
+2. DFS
+3. Cycle Detection Undirected using BFS
+4. Cycle Detection Undirected using DFS
+5. Cycle Detection Directed using DFS (pathVis)
+6. Cycle Detection Directed using BFS (Kahn's Algorithm) -> If topo sort cannot include all nodes → cycle exists
+7. Topological Sort DFS (Stack)
+8. Topological Sort BFS (Kahn's Algo)
+Connected Components (DFS/BFS)
