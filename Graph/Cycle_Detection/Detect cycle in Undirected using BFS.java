@@ -1,3 +1,5 @@
+vis, Pair(node,parent)
+
 class Pair{
     int node;
     int parent;
