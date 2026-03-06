@@ -1,12 +1,9 @@
-
 import java.util.*;
 
 class Solution {
-
-    public static void dfs(int node, boolean[] vis, ArrayList<ArrayList<Integer>> adj) {
-        
+    public static void dfs(int node, boolean[] vis, ArrayList<ArrayList<Integer>> adj,ArrayList<Integer> list) {
         vis[node] = true;
-        System.out.print(node + " ");
+        list.add(node);
 
         for(int it : adj.get(node)) {
             if(!vis[it]) {
