@@ -1,0 +1,15 @@
+Shortest Path in Undirected graph = Dijkstra's Algorithm 
+         HERE use --> queue           HERE --> pq
+
+
+Algo : 
+1. Use a min priority queue to always pick node with smallest distance -> compare with wt/dist
+2. For each neighbor, relax edge → update distance if shorter path found
+3. Repeat until PQ is empty → final dist[] gives shortest path
+
+Shortest path in DAG :
+1. Get topological sort using DFS
+2. Initialize distances (∞) and set source node (0) = 0
+3. take each node from stack of topo and relax all outgoing edges
+4. Update shortest distances and mark unreachable nodes as -1
+
