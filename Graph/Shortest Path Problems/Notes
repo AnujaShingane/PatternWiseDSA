@@ -13,3 +13,16 @@ Shortest path in DAG :
 3. take each node from stack of topo and relax all outgoing edges
 4. Update shortest distances and mark unreachable nodes as -1
 
+Bellman ford :
+1. Applicable for negative edges/negative cycles too
+2. Works only on directed graph
+3. If graph is undirected, convert it to directed by directing to both sides
+
+relaxation formula : 
+if(dist[u]!=(int)(1e8) && dist[u]+wt < dist[v]){
+    dist[v] = dist[u]+wt;
+}
+
+Algo :
+1. Relax all the edges N-1 times sequentially
+2. in last iteration if negative cycle occured return -1 arr
