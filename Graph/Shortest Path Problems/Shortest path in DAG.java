@@ -1,3 +1,10 @@
+"""
+    1. Find topo sort of the graph(which node is before which)
+    2. Create dist Array
+    3. Pop one by one ele from stack of topo and relax the edge for the same node and each time update the dist array.
+"""
+
+
 class Pair{
     int node;
     int wt;
