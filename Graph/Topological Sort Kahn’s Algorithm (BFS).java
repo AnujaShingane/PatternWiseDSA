@@ -1,3 +1,5 @@
+For DAG only
+
 public List<Integer> topoSort(int n, List<List<Integer>> adj) {
     int[] indegree = new int[n];
     for (int i = 0; i < n; i++) {
