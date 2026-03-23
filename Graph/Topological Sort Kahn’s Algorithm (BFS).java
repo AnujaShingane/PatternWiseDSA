@@ -1,8 +1,12 @@
 For DAG only
 
-    1. Make indegree arr and store all indegrees of all nodes
+    Use : indegree arr + Queue 
+
+    1. Make indegree arr and store indegrees of all nodes
     2. nodes with indegree 0, push 'em into the queue
-    3. 
+    3. while !q.empty -> poll node add it to res
+    4. traverse of all neighbours of that node reduce indegrees for those neighbour each time 
+    5. each time when indegree becomes 0 of nei. offer it to the queue
 
 public List<Integer> topoSort(int n, List<List<Integer>> adj) {
     int[] indegree = new int[n];
