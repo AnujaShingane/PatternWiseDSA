@@ -1,5 +1,6 @@
 For DAG only
-
+Use : Stack + dfs + backtracking
+    
 public void topoDFS(int node, boolean[] vis, Stack<Integer> st, List<List<Integer>> adj) {
     vis[node] = true;
 
@@ -7,5 +8,5 @@ public void topoDFS(int node, boolean[] vis, Stack<Integer> st, List<List<Intege
         if (!vis[nei]) topoDFS(nei, vis, st, adj);
     }
 
-    st.push(node);
+    st.push(node); // backtracking
 }
