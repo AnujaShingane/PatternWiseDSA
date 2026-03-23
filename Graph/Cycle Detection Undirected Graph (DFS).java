@@ -1,3 +1,6 @@
+Same as dfs 
+    imp -> if vis and !parent -> cycle
+
 public boolean dfsCycle(int node, int parent, boolean[] vis, List<List<Integer>> adj) {
     vis[node] = true;
 
