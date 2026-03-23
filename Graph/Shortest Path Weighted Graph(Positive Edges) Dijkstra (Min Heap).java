@@ -1,3 +1,6 @@
+Dijkstra (weighted + positive)
+    Use : PriorityQueue
+
 class Pair {
     int node, dist;
     Pair(int n, int d) {
