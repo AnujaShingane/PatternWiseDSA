@@ -5,7 +5,7 @@ public boolean dfsDirected(int node, boolean[] vis, boolean[] pathVis, List<List
     for (int nei : adj.get(node)) {
         if (!vis[nei]) {
             if (dfsDirected(nei, vis, pathVis, adj)) return true;
-        } else if (pathVis[nei]) {
+        } else if (vis[nei] && pathVis[nei]) {
             return true;
         }
     }
