@@ -1,5 +1,5 @@
 Dijkstra (weighted + positive)
-    Use : PriorityQueue
+    Use : PriorityQueue + dist arr
 
 class Pair {
     int node, dist;
