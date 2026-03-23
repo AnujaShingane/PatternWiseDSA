@@ -1,5 +1,9 @@
 For DAG only
 
+    1. Make indegree arr and store all indegrees of all nodes
+    2. nodes with indegree 0, push 'em into the queue
+    3. 
+
 public List<Integer> topoSort(int n, List<List<Integer>> adj) {
     int[] indegree = new int[n];
     for (int i = 0; i < n; i++) {
@@ -18,7 +22,8 @@ public List<Integer> topoSort(int n, List<List<Integer>> adj) {
         res.add(node);
 
         for (int nei : adj.get(node)) {
-            if (--indegree[nei] == 0) q.offer(nei);
+            indegree[nei] -= 1;
+            if (indegree[nei] == 0) q.offer(nei);
         }
     }
 
