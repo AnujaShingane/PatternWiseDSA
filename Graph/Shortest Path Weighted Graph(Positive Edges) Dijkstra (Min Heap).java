@@ -1,6 +1,10 @@
 Dijkstra (weighted + positive)
     Use : PriorityQueue + dist arr
 
+        1. start with all 1e9 valued dist arr
+        2. put src in pq
+        3. while !q.empty relax the edges and update the distances
+
 class Pair {
     int node, dist;
     Pair(int n, int d) {
@@ -9,8 +13,8 @@ class Pair {
     }
 }
 
-public int[] dijkstra(int n, List<List<Pair>> adj, int src) {
-    int[] dist = new int[n];
+public int[] dijkstra(int n1, List<List<Pair>> adj, int src) {
+    int[] dist = new int[n1];
     Arrays.fill(dist, Integer.MAX_VALUE);
     dist[src] = 0;
 
@@ -20,11 +24,19 @@ public int[] dijkstra(int n, List<List<Pair>> adj, int src) {
     while (!pq.isEmpty()) {
         Pair curr = pq.poll();
         int node = curr.node;
+        int d = curr.dist;
 
+        if(d>dist[node])continue;
+
+        //relaxation of edges
         for (Pair nei : adj.get(node)) {
-            if (dist[node] + nei.dist < dist[nei.node]) {
-                dist[nei.node] = dist[node] + nei.dist;
-                pq.offer(new Pair(nei.node, dist[nei.node]));
+            int n = nei.node;
+            int dis = nei.dist;
+            int newDist = dis+d;
+
+            if(newDist<dist[n]){
+                dist[n] = newDist;
+                pq.offer(new Pair(n,newDist));
             }
         }
     }
