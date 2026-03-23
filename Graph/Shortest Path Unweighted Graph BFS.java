@@ -1,3 +1,7 @@
+This is simple bfs of shortest path
+
+Use : dist arr + queue
+
 public int[] bfsShortestPath(int n, List<List<Integer>> adj, int src) {
     int[] dist = new int[n];
     Arrays.fill(dist, -1);
