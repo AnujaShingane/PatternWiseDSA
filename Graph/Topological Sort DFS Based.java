@@ -10,3 +10,6 @@ public void topoDFS(int node, boolean[] vis, Stack<Integer> st, List<List<Intege
 
     st.push(node); // backtracking
 }
+
+
+--> Gives which node is before what
