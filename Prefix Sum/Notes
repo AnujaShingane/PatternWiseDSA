@@ -1,0 +1,5 @@
+The Golden Rule:
+
+--> If you want to find the sum of any subarray from index L to R, you do not need a for loop. You just use math:
+--> Sum(L, R) = Prefix[R] - Prefix[L - 1]
+
