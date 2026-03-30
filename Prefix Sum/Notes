@@ -3,3 +3,25 @@ The Golden Rule:
 --> If you want to find the sum of any subarray from index L to R, you do not need a for loop. You just use math:
 --> Sum(L, R) = Prefix[R] - Prefix[L - 1]
 
+
+The 4 Core Prefix Sum Patterns & Hints
+1. The Hash Map Combo (The Most Common OA Question)
+The Goal: Find the total number of contiguous subarrays that equal a specific target sum K.
+The Hint: If current_prefix_sum - K exists in our Hash Map, it means we have found a valid subarray!
+How it works: You iterate through the array, keeping a running total (current_sum). You store every running total in a Hash Map as (Sum, Frequency). At every step, you check the map for current_sum - K.
+Crucial Edge Case: Always initialize your map with map.put(0, 1). This accounts for valid subarrays that start from the very first index.
+
+2. The Left/Right Split (Equilibrium)
+The Goal: Find an index where the sum of everything to its left equals the sum of everything to its right.
+The Hint: You don't need two prefix arrays! Just find the total_sum of the whole array first.
+How it works: As you iterate, keep a left_sum. The right_sum is simply total_sum - left_sum - current_element. If left_sum == right_sum, you found your pivot.
+
+3. Modulo & Parity (Divisibility)
+The Goal: Find subarrays whose sum is divisible by K, or subarrays with an equal number of 0s and 1s.
+The Hint: For divisibility, if prefix_sum[i] % K == prefix_sum[j] % K, then the sum of the elements between i and j is perfectly divisible by K.
+How it works: Instead of storing the actual sums in your Hash Map, you store the remainders (current_sum % K). If you see the same remainder again, you found a valid subarray.
+
+4. The Difference Array (Line Sweep)
+The Goal: You are given multiple queries to add a value V to all elements in a range [L, R].
+The Hint: Doing this normally takes O(N * Queries). Using a difference array makes it O(N + Queries).
+How it works: Create an array of zeroes. For each query, do arr[L] += V and arr[R + 1] -= V. After processing all queries, taking the prefix sum of this array will give you the final updated values.
