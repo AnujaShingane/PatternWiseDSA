@@ -4,7 +4,8 @@ The Golden Rule:
 --> Sum(L, R) = Prefix[R] - Prefix[L - 1]
 
 
-The 4 Core Prefix Sum Patterns & Hints
+--> The 4 Core Prefix Sum Patterns & Hints
+
 1. The Hash Map Combo (The Most Common OA Question)
 The Goal: Find the total number of contiguous subarrays that equal a specific target sum K.
 The Hint: If current_prefix_sum - K exists in our Hash Map, it means we have found a valid subarray!
