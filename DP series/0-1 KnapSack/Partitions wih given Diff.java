@@ -1,103 +1,107 @@
-Recursive -->
+Recursion ->
+class Solution {
+    public int countPartitions(int[] nums, int diff) {
+        int n = nums.length;
+        int sum = 0;
+        for(int ele : nums){
+            sum+=ele;
+        }
+        if ((diff + sum) % 2 != 0 || Math.abs(diff) > sum) {
+            return 0;
+        }
+        
+        int target = (diff + sum)/2;
+        return func(n-1,nums,target);
+    }
+    
+    public int func(int ind,int[] nums,int target) {
+        if(ind==0){
+            if(target==0 && nums[0]==0)return 2;
+            if(target==0 || nums[0]==target) return 1;
+            else return 0;
+        }
 
-public class Solution {
-	public static int countPartitions(int n, int d, int[] arr) {
-		int totalSum=0;
-		int MOD = (int)(1e9+7);
-		for(int num : arr)totalSum+=num;
-		if(totalSum - d < 0 || (totalSum - d) % 2 != 0) return 0;
-		int target = (totalSum - d) / 2;
+        int nottake = func(ind-1,nums,target);
+        int take = 0;
+        if(target>=nums[ind])take = func(ind-1,nums,target-nums[ind]);
 
-		return func(n-1,target,arr,MOD);
-	}
-
-	public static int func(int ind,int target,int[] arr,int MOD) {
-		if(ind==0){
-			if(target==0 && arr[0]==0)return 2;
-			if(target==0 || arr[0]==target)return 1;
-			return 0;
-		}
-
-		int nottake = func(ind-1,target,arr,MOD);
-		int take = 0;
-		if(arr[ind]<=target)take = func(ind-1,target-arr[ind],arr,MOD);
-
-		return (nottake+take)%MOD;
-	}
+        return take + nottake;
+    }
 }
 
-Memo -->
+Memo -> 
 
-public class Solution {
-	public static int countPartitions(int n, int d, int[] arr) {
-		int totalSum=0;
-		int MOD = (int)(1e9+7);
-		for(int num : arr)totalSum+=num;
-		if(totalSum - d < 0 || (totalSum - d) % 2 != 0) return 0;//if less or odd -> return 0
-		
-		int target = (totalSum - d) / 2;
+class Solution {
+    public int countPartitions(int[] nums, int diff) {
+        int n = nums.length;
+        int sum = 0;
+        for(int ele : nums){
+            sum+=ele;
+        }
+        
+        if ((diff + sum) % 2 != 0 || Math.abs(diff) > sum) {
+            return 0;
+        }
+        
+        int target = (diff + sum)/2;
+        int[][] dp = new int[n][target+1];
+        for(int[] arr : dp){
+            Arrays.fill(arr,-1);
+        }
+        
+        return func(n-1,nums,target,dp);
+    }
+    
+    public int func(int ind,int[] nums,int target,int[][] dp) {
+        if(ind==0){
+            if(target==0 && nums[0]==0)return 2;
+            if(target==0 || nums[0]==target) return 1;
+            else return 0;
+        }
+        
+        if(dp[ind][target]!=-1)return dp[ind][target];
 
-		int[][] dp = new int[n][target+1];
-		for(int[] a : dp){
-			Arrays.fill(a,-1);
-		}
+        int nottake = func(ind-1,nums,target,dp);
+        int take = 0;
+        if(target>=nums[ind])take = func(ind-1,nums,target-nums[ind],dp);
 
-		return func(n-1,target,dp,arr,MOD);
-	}
-
-	public static int func(int ind,int target,int[][] dp,int[] arr,int MOD) {
-		if(ind==0){
-			if(target==0 && arr[0]==0)return 2;
-			if(target==0 || arr[0]==target)return 1;
-			return 0;
-		}
-
-		if(dp[ind][target]!=-1)return dp[ind][target];
-
-		int nottake = func(ind-1,target,dp,arr,MOD);
-		int take = 0;
-		if(arr[ind]<=target)take = func(ind-1,target-arr[ind],dp,arr,MOD);
-
-		return dp[ind][target] = (nottake+take)%MOD;
-	}
+        return dp[ind][target] = take + nottake;
+    }
 }
 
 
+Tabu ->
 
-
-Tabu -->
-
-public class Solution {
-	public static int countPartitions(int n, int d, int[] arr) {
-		int totalSum=0;
-		int MOD = (int)(1e9+7);
-		for(int num : arr)totalSum+=num;
-		if(totalSum - d < 0 || (totalSum - d) % 2 != 0) return 0;//if less or odd -> return 0
-		
-		int target = (totalSum - d) / 2;
-
-		int[][] dp = new int[n][target+1];
-
-		if(arr[0]==0){
-			dp[0][0] = 2;//take or nottake
-		}else{
-			dp[0][0] = 1;//nottake
-		}
-
-		if(arr[0]!=0 && arr[0]<=target){
-			dp[0][arr[0]]=1; // take
-		}
-
-		for(int i = 1 ; i < n ; i++){
-			for(int t = 0 ; t <= target ; t++){
-				int nottake = dp[i-1][t];
-				int take = 0;
-				if(arr[i]<=t)take = dp[i-1][t-arr[i]];
-
-				dp[i][t] = (nottake+take)%MOD;
-			}
-		}
-
-		return dp[n-1][target];
-	}
+class Solution {
+    public int countPartitions(int[] nums, int diff) {
+        int n = nums.length;
+        int sum = 0;
+        for(int ele : nums){
+            sum+=ele;
+        }
+        
+        if ((diff + sum) % 2 != 0 || Math.abs(diff) > sum) {
+            return 0;
+        }
+        
+        int target = (diff + sum)/2;
+        int[][] dp = new int[n][target+1];
+        
+        if(nums[0]==0)dp[0][0] = 2;
+        else dp[0][0] = 1;
+        if(nums[0]>0)dp[0][nums[0]] = 1;
+        
+        
+        for(int i = 1 ; i < n ; i++){
+            for(int t = 0 ; t <= target ; t++){
+                int nottake = dp[i-1][t];
+                int take = 0;
+                if(t>=nums[i])take = dp[i-1][t-nums[i]];
+        
+                dp[i][t] = take + nottake;
+            }
+        }
+        
+        return dp[n-1][target];
+    }
 }
