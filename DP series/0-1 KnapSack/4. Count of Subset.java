@@ -30,89 +30,81 @@ Hence the output will be 3. Please note that both 1 present in 'arr' are treated
 
 Recur-->
 public class Solution {
-    public static int findWays(int num[], int tar) {
-        int n = num.length;
-        int MOD = (int)(1e9+7);
-        return func(n-1,tar,num,MOD);
-    }
-
-    public static int func(int i , int tar,int[] num,int MOD){
-        if(i == 0){
-            if(tar == 0 && num[0] == 0) return 2; // take or not take
-            if(tar == 0 || num[0] == tar) return 1;
-            return 0;
+      class Solution {
+        public int perfectSum(int[] nums, int target) {
+            int n = nums.length;
+            return func(n-1,nums,target);
         }
-
-        int nottake = func(i-1,tar,num,MOD);
-        int take = 0;
-        if(num[i]<=tar)take = func(i-1,tar-num[i],num,MOD);
-
-        return (nottake+take)%MOD;
-    }
+        
+        public int func(int ind,int[] nums,int target) {
+            if(ind == 0){
+                if(target == 0 && nums[0] == 0) return 2; // include or exclude
+                if(target == 0 || nums[0] == target) return 1;
+                return 0;
+            }
+            
+            int nottake = func(ind-1,nums,target);
+            int take = 0;
+            if(target>=nums[ind])take = func(ind-1,nums,target-nums[ind]);
+            
+            return take+nottake;
+        }
 }
-
-Memo-->
+  }
   
-public class Solution {
-    public static int findWays(int num[], int tar) {
-        int n = num.length;
-        int MOD = (int)(1e9+7);
-        int[][] dp = new int[n][tar+1];
+Memo-->
+class Solution {
+    public int perfectSum(int[] nums, int target) {
+        int n = nums.length;
+        int[][] dp = new int[n][target+1];
         for(int[] arr : dp){
             Arrays.fill(arr,-1);
         }
-        return func(n-1,tar,num,dp,MOD);
+        
+        return func(n-1,nums,target,dp);
     }
-
-    public static int func(int i , int tar,int[] num,int[][] dp,int MOD){
-        if(i == 0){
-            if(tar == 0 && num[0] == 0) return 2; // take or not take
-            if(tar == 0 || num[0] == tar) return 1;
+    
+    public int func(int ind,int[] nums,int target,int[][] dp) {
+        if(ind==0){
+            if(target==0 && nums[0] == 0)return 2;
+            if(target == 0 || target == nums[0])return 1;
             return 0;
         }
-
-        if(dp[i][tar]!= -1)return dp[i][tar];
-
-        int nottake = func(i-1,tar,num,dp,MOD);
+        
+        if(dp[ind][target]!=-1)return dp[ind][target];
+        
+        int nottake = func(ind-1,nums,target,dp);
         int take = 0;
-        if(num[i]<=tar)take = func(i-1,tar-num[i],num,dp,MOD);
-
-        return dp[i][tar] = (nottake+take)%MOD;
+        if(target>=nums[ind])take = func(ind-1,nums,target-nums[ind],dp);
+        
+        return dp[ind][target] = take+nottake;
     }
 }
 
-
 Tabu -->
-public class Solution {
-    public static int findWays(int num[], int tar) {
-        int n = num.length;
-        int MOD = (int)(1e9+7);
-        int[][] dp = new int[n][tar+1];
+class Solution {
+    public int perfectSum(int[] nums, int target) {
+        int n = nums.length;
+        int[][] dp = new int[n][target+1];
         for(int[] arr : dp){
             Arrays.fill(arr,0);
         }
-
-        //for i==0
-        if(num[0]==0){
-            dp[0][0] = 2;//take or nottake
-        }else{
-            dp[0][0] = 1;//nottake
-        }
-
-        if(num[0]!= 0 && num[0]<=tar){
-            dp[0][num[0]] = 1;//take
-        }
-
+        
+        if(nums[0]==0)dp[0][0] = 2;
+        else dp[0][0] =1;
+        if(nums[0]!= 0 && target>=nums[0])dp[0][nums[0]]=1;
+        
+        
         for(int i = 1 ; i < n ; i++){
-            for(int t = 0 ; t <= tar ; t++){
+            for(int t = 0 ; t <= target ; t++){
                 int nottake = dp[i-1][t];
                 int take = 0;
-                if(num[i]<=t)take = dp[i-1][t-num[i]];
-
-                dp[i][t] = (nottake+take)%MOD;
+                if(t>=nums[i])take = dp[i-1][t-nums[i]];
+                
+                dp[i][t] = take+nottake;
             }
         }
-
-        return dp[n-1][tar];
+        
+        return dp[n-1][target];
     }
 }
