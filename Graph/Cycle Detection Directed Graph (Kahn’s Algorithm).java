@@ -1,7 +1,8 @@
 Use : indegree + queue
     (Same as topo sort in directed using kahn's algo)
     imp -> works on DAG -> Acyclic 
-      condn -> if(count == n) -> Acyclic (No cycle) else cycle detected
+      condn -> if(count == n) -> Acyclic (No cycle) else if(count<n) -> cycle detected
+    
 
 public boolean hasCycleKahn(int n, List<List<Integer>> adj) {
     int[] indegree = new int[n];
