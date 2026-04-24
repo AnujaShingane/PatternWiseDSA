@@ -5,7 +5,7 @@ Since the number of ways can be very large, print it modulo 10 ^ 9 + 7.
 
 Example:
 Input: 'arr' = [1, 1, 4, 5]
-
+k = 5
 Output: 3
 
 Explanation: The possible ways are:
