@@ -9,9 +9,9 @@ class Pair {
     int node, 
     int dist;
     
-    Pair(int n, int d) {
-        node = n;
-        dist = d;
+    Pair(int node, int dist) {
+        this.node = node;
+        this.dist = dist;
     }
 }
 
