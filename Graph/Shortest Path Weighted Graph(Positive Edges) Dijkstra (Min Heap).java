@@ -6,7 +6,7 @@ Dijkstra (weighted + positive)
         3. while !q.empty relax the edges and update the distances
 
 class Pair {
-    int node, 
+    int node;
     int dist;
     
     Pair(int node, int dist) {
