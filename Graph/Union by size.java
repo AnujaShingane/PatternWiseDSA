@@ -13,12 +13,16 @@ class DisjointSet {
     }
 
     public int findUPar(int node) {
-
         if (node == parent.get(node)) {
             return node;
         }
-
-        return parent.set(node, findUPar(parent.get(node)));
+    
+        int ulp = findUPar(parent.get(node));
+    
+        // Path compression
+        parent.set(node, ulp);
+    
+        return ulp;
     }
 
     public void unionBySize(int u, int v) {
