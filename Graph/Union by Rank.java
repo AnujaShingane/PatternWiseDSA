@@ -2,27 +2,28 @@ import java.util.*;
 
 class DisjointSet {
 
-    List<Integer> rank = new ArrayList<>();
-    List<Integer> parent = new ArrayList<>();
+    int[] rank;
+    int[] parent;
 
     public DisjointSet(int n) {
+
+        rank = new int[n];
+        parent = new int[n];
+
         for (int i = 0; i < n; i++) {
-            rank.add(0);
-            parent.add(i);
+            rank[i] = 0;
+            parent[i] = i;
         }
     }
 
     public int findUPar(int node) {
-        if (node == parent.get(node)) {
+
+        if (node == parent[node]) {
             return node;
         }
 
-        int ulp = findUPar(parent.get(node));
-
         // Path compression
-        parent.set(node, ulp);
-
-        return parent.get(node);
+        return parent[node] = findUPar(parent[node]);
     }
 
     public void unionByRank(int u, int v) {
@@ -36,15 +37,15 @@ class DisjointSet {
         }
 
         // Attach smaller rank tree under larger rank tree
-        if (rank.get(ulp_u) < rank.get(ulp_v)) {
-            parent.set(ulp_u, ulp_v);
+        if (rank[ulp_u] < rank[ulp_v]) {
+            parent[ulp_u] = ulp_v;
         }
-        else if (rank.get(ulp_v) < rank.get(ulp_u)) {
-            parent.set(ulp_v, ulp_u);
+        else if (rank[ulp_v] < rank[ulp_u]) {
+            parent[ulp_v] = ulp_u;
         }
         else {
-            parent.set(ulp_v, ulp_u);
-            rank.set(ulp_u, rank.get(ulp_u) + 1);
+            parent[ulp_v] = ulp_u;
+            rank[ulp_u]++;
         }
     }
 }
