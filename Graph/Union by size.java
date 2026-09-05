@@ -2,27 +2,28 @@ import java.util.*;
 
 class DisjointSet {
 
-    List<Integer> size = new ArrayList<>();
-    List<Integer> parent = new ArrayList<>();
+    int[] size;
+    int[] parent;
 
     public DisjointSet(int n) {
+
+        size = new int[n];
+        parent = new int[n];
+
         for (int i = 0; i < n; i++) {
-            size.add(1);
-            parent.add(i);
+            size[i] = 1;
+            parent[i] = i;
         }
     }
 
     public int findUPar(int node) {
-        if (node == parent.get(node)) {
+
+        if (node == parent[node]) {
             return node;
         }
-    
-        int ulp = findUPar(parent.get(node));
-    
+
         // Path compression
-        parent.set(node, ulp);
-    
-        return ulp;
+        return parent[node] = findUPar(parent[node]);
     }
 
     public void unionBySize(int u, int v) {
@@ -34,15 +35,15 @@ class DisjointSet {
             return;
         }
 
-        if (size.get(ulp_u) < size.get(ulp_v)) {
+        if (size[ulp_u] < size[ulp_v]) {
 
-            parent.set(ulp_u, ulp_v);
-            size.set(ulp_v, size.get(ulp_v) + size.get(ulp_u));
+            parent[ulp_u] = ulp_v;
+            size[ulp_v] = size[ulp_v] + size[ulp_u];
 
         } else {
 
-            parent.set(ulp_v, ulp_u);
-            size.set(ulp_u, size.get(ulp_u) + size.get(ulp_v));
+            parent[ulp_v] = ulp_u;
+            size[ulp_u] = size[ulp_u] + size[ulp_v];
         }
     }
 }
