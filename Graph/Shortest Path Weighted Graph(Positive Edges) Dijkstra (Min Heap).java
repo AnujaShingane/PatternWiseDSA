@@ -14,7 +14,6 @@ class Pair {
         this.dist = dist;
     }
 }
-
 public int[] dijkstra(int n1, List<List<Pair>> adj, int src) {
     int[] dist = new int[n1];
     Arrays.fill(dist, Integer.MAX_VALUE);
